@@ -1,21 +1,37 @@
 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form method="POST">
+        <label for="email">E-mail:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="senha">Senha:</label><br>
+        <input type="password" id="senha" name="senha" required><br><br>
+
+        <button type="submit">Entrar</button>
+    </form>
+</body>
+</html>
+
 <?php
 session_start();
 
-// Captura os dados do formulário
-$email = $_POST['email'];
-$senha = $_POST['senha'];
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $email = $_POST['email'] ?? '';
+    $senha = $_POST['senha'] ?? '';
 
-// Verifica se os dados correspondem ao usuário administrador
-if ($email === 'admin@admin.com' && $senha === '12345') {
-    // Armazena o usuário na sessão
-    $_SESSION['usuario'] = $email;
-
-    // Redireciona para o painel
-    header('Location: painel.php');
-    exit;
-} else {
-    // Exibe mensagem de erro
-    echo "Usuário ou senha inválidos!";
+    if ($email === 'carlinhos@gmail.com' && $senha === '12345') {
+        $_SESSION['usuario'] = $email;
+        header('Location: painel.php');
+        exit;
+    } else {
+        echo "<p style='color:red;'>Usuário ou senha inválidos!</p>";
+    }
 }
 ?>
